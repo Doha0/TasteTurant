@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Providers/AuthProvider';
 
 
 const SignUp = () => {
-   
+
+    const { createUser } = useContext(AuthContext);
+
 
     const handleSignUp = event => {
         event.preventDefault();
@@ -14,7 +17,7 @@ const SignUp = () => {
         console.log(email, password);
     }
 
-    
+
 
     return (
         <>
@@ -44,12 +47,12 @@ const SignUp = () => {
                                     <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                                 </label>
                             </div>
-            
+
                             <div className="form-control mt-6">
                                 <input className="btn btn-primary" type="submit" value="SignUp" />
                             </div>
                         </form>
-                        <p><small>Already Have an account? <Link to="/login">Login</Link> </small></p>
+                        <p className='m-4 pl-4'><small>Already Have an account? <Link to="/login">Login</Link> </small></p>
                     </div>
                 </div>
             </div>
