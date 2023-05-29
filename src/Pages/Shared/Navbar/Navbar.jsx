@@ -20,6 +20,7 @@ const Navbar = () => {
             <li><Link to='/secret'>secret</Link></li>
             {
                 user ? <>
+                    {user && <span>{user.displayName}</span>}
                     <button onClick={handleLogOut} className="btn btn-ghost">LogOut</button>
                 </>
                     : <>
@@ -43,7 +44,7 @@ const Navbar = () => {
                             }
                         </ul>
                     </div>
-                    <a className="btn btn-ghost normal-case text-xl">TasteTurant</a>
+                    <Link to={"/"} className="btn btn-ghost normal-case text-xl">TasteTurant</Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
