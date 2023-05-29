@@ -4,7 +4,7 @@ import Cover from '../../Shared/Cover/Cover';
 import { Link } from 'react-router-dom';
 
 const MenuCategory = ({ items, title, img }) => {
-    console.log(title);
+
     return (
         <div className='pt-12'>
             {
