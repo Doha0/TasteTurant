@@ -22,10 +22,12 @@ const Navbar = () => {
             <li><Link to='/order/salad'>Order Foods</Link></li>
             <li><Link to='/secret'>secret</Link></li>
             <li>
-                <button className="btn gap-2">
-                    <FaShoppingCart />
-                    <div className="badge badge-secondary">+{cart?.length || 0}</div>
-                </button>
+                <Link to='/dashboard/mycart'>
+                    <button className="btn gap-2">
+                        <FaShoppingCart />
+                        <div className="badge badge-secondary">+{cart?.length || 0}</div>
+                    </button>
+                </Link>
             </li>
             {
                 user ? <>
