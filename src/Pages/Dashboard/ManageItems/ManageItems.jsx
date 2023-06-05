@@ -2,9 +2,41 @@ import React from 'react';
 import SectionTitle from '../../../Components/SectionTitle/SectionTitle';
 import { FaTrashAlt } from 'react-icons/fa';
 import useMenu from '../../../Hooks/useMenu';
+import Swal from 'sweetalert2';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 
 const ManageItems = () => {
-    const [menu] = useMenu();
+    const [menu, , refetch] = useMenu();
+    const [axiosSecure] = useAxiosSecure();
+
+    const handleDelete = (item) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                axiosSecure.delete(`/menu/${item._id}`)
+                    .then(res => {
+                        console.log('deleted res', res.data);
+                        if (res.data.deletedCount > 0) {
+                            refetch();
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            )
+                        }
+                    })
+
+            }
+        })
+    }
 
     return (
         <div>
@@ -49,7 +81,7 @@ const ManageItems = () => {
                                     <button className="btn btn-ghost btn-xs">details</button>
                                 </td>
                                 <td>
-                                    <button className="btn btn-ghost bg-red-600  text-white"><FaTrashAlt></FaTrashAlt></button>
+                                    <button onClick={() => handleDelete(item)} className="btn btn-ghost bg-red-600  text-white"><FaTrashAlt></FaTrashAlt></button>
                                 </td>
                             </tr>)
                         }
